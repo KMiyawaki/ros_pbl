@@ -1,0 +1,18 @@
+{
+    "name": "ros_pbl",
+    "dockerFile": "Dockerfile",
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+    },
+    "forwardPorts": [
+        9090,
+    ],
+    "remoteUser": "ubuntu",
+    "workspaceFolder": "/home/ubuntu",
+    "remoteEnv": {
+        "DISPLAY": "host.docker.internal:0.0"
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder}/scripts,target=/home/ubuntu/scripts,type=bind,consistency=cached"
+    ]
+}

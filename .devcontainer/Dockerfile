@@ -1,32 +1,8 @@
-FROM osrf/ros:melodic-desktop-bionic
+FROM ros:melodic-ros-base
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    curl \
-    dnsutils \
-    emacs \
     git \
-    iputils-ping \
-    less \
-    nano \
-    net-tools \
-    openssh-server \
-    python-pip \
-    python3-pip \
-    python-tk \
-    ros-melodic-navigation \
-    ros-melodic-laser-filters \
-    ros-melodic-laser-pipeline \
-    ros-melodic-slam-gmapping \
-    ros-melodic-map-server \
-    ros-melodic-teleop-twist-keyboard \
-    ros-melodic-mouse-teleop \
-    ros-melodic-rosemacs \
-    ros-melodic-roswww \
-    ros-melodic-stage-ros \
-    traceroute \
-    x11-apps x11-utils x11-xserver-utils dbus-x11 \
-    language-pack-ja-base language-pack-ja locales \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -35,5 +11,11 @@ RUN locale-gen ja_JP.UTF-8 && useradd --create-home --home-dir /home/ubuntu --sh
     echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER ubuntu
+
+RUN git clone https://github.com/KMiyawaki/setup_robot_programming.git /home/ubuntu
+
+WORKDIR /home/ubuntu/setup_robot_programming
+
+RUN ./set_japanese_apt.sh && ./install_basic_packages.sh
 
 ENV LANG ja_JP.UTF-8

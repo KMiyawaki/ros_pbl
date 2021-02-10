@@ -6,6 +6,7 @@
     },
     "forwardPorts": [
         9090,
+        50001
     ],
     "remoteUser": "ubuntu",
     "workspaceFolder": "/home/ubuntu",
